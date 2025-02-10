@@ -10,7 +10,8 @@ import java.util.Scanner;
  * 
  */
 public class FillCell03_delta {
-
+//FillCell3의 버전을 좌표값으로 미리 정해두고 하는 방식으로 변경한 내용
+	//상하좌우 사방에 1 씌우기, 8방좌표 예시도 작성함
 	public static void main(String[] args) {
 		Scanner sc = new Scanner(System.in);
 		int N = sc.nextInt();

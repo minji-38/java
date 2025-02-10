@@ -21,7 +21,7 @@ public class FillCell03 {
 		/// 처리 코드 작성
 
 		//상
-		if (r-1 > -1) map[r-1][c] = 1;
+		if (r-1 > -1) map[r-1][c] = 1; //FillCell2 경계검사추가 버전
 		//하
 		if (r+1 < N) map[r+1][c] = 1;
 		//좌
