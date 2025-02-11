@@ -5,7 +5,7 @@ import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.Scanner;
 import java.util.StringTokenizer;
-//처음에 한 코드(boolean을 써서 문항이 길어질수록 느려짐 => 보완필요 RandomNumberParttern2.java가 보완코드)
+// boolean 사용 안하고 int로 보완한 내 코드
 /**
  * 가로, 세로의 길이가 N인 N x N 정사각 행렬이 있다. 
  * 이 행렬의 각각의 값으로서 0에서 9 사이의 수가 무작위로 넣어진다고 하자. 
@@ -32,8 +32,7 @@ import java.util.StringTokenizer;
  * #1 6 4
  * #2 1 1
  */
-public class RandomNumberPattern {
-	static int N, Answer1, Answer2;
+public class RandomNumberPattern2 {
 	static int[][] matrix;
 	
 	//8방향으로 좌표 설정
@@ -47,7 +46,7 @@ public class RandomNumberPattern {
         int T = Integer.parseInt(br.readLine().trim()); // **공백 제거**
         
         for (int test_case = 1; test_case <= T; test_case++) {
-            N = Integer.parseInt(br.readLine().trim()); // **공백 제거**
+            int N = Integer.parseInt(br.readLine().trim()); // **공백 제거**
             matrix = new int[N][N];
             
             // 행렬 입력 받기
@@ -58,99 +57,35 @@ public class RandomNumberPattern {
                 }
             }
             
-            Answer1 = 0;
-            Answer2 = 0;
+            int big = 0;
+            int small = 0;
 
          // 내부 숫자만 탐색 (가장자리는 제외)
             for (int r = 1; r < N - 1; r++) {
                 for (int c = 1; c < N - 1; c++) {
                     int current = matrix[r][c];
-                    int isBig = 1;  // 1이면 큰 수, 0이면 아님
-                    int isSmall = 1; // 1이면 작은 수, 0이면 아님
+                    int big_count = 0;  // 1이면 큰 수, 0이면 아님
+                    int small_count = 0; // 1이면 작은 수, 0이면 아님
 
                     // 8방향 탐색
                     for (int d = 0; d < 8; d++) {
                         int nr = r + dr[d];
                         int nc = c + dc[d];
 
-                        if (matrix[nr][nc] >= current) isBig = 0; 
-                        if (matrix[nr][nc] <= current) isSmall = 0; 
+                        if (matrix[nr][nc] > current) small_count++; 
+                        if (matrix[nr][nc] < current) big_count++; 
                     }
 
-                    Answer1 += isBig;  // 큰 수 개수 추가
-                    Answer2 += isSmall; // 작은 수 개수 추가
+                    if (big_count == 8) { //8개 중에 가장 큰 수였으면 big++
+                    	big++; // 큰 수 개수 추가
+                    }
+                    if (small_count == 8) {
+                    	small++; // 작은 수 개수 추가
+                    }
                 }
             }
 
-            System.out.println("#" + test_case + " " + Answer1 + " " + Answer2);
+            System.out.println("#" + test_case + " " + big + " " + small);
         }
     }
 }
-
-
-
-//강사님 정답
-
-//public class RandomNumberPattern {
-//	public static void main(String[] args) throws FileNotFoundException {
-//		System.setIn(new FileInputStream("src/fillCell/RandomNumberPattern.txt"));
-//
-//		int[] dr = { -1, 1, 0, 0, -1, -1, 1, 1};
-//		int[] dc = { 0, 0, -1, 1, -1, 1, -1, 1};
-//		
-//		Scanner sc = new Scanner(System.in);
-//		int T = sc.nextInt();  // 2
-//		for (int test_case = 1; test_case <=T; test_case++) {
-//			//입력 처리 
-//			int N = sc.nextInt();	// 9
-//			int matrix[][] = new int[N][N];
-//			for (int i = 0; i < N; i++) {
-//				for (int j = 0; j <N; j++) {
-//					matrix[i][j] = sc.nextInt();
-//				}
-//			}
-//			//구현
-//			// 1~N-1 범위의 모든 배열은 탐색하면서 현재 수가 큰수 또는 작은 수인지 검사하기
-//			
-//			
-//			int big = 0;			//큰수 카운트 셀 변수
-//			int small = 0;			//작은 수 카운트 셀 변수 
-//			int d = 8, nr=0, nc=0;
-//			// 1~N-2 범위의 모든 배열은 탐색 ==> 0,N-1은 8방이 없으므로 제외
-//			for(int r = 1; r<N-1; r++) {
-//				for(int c = 1; c<N-1; c++) {
-//					//현재 위치의 수가 큰수인지 작은 수 인지를 체크하기 위한 변수를 초기화 한다.
-//					//모든 수들을 검사해야 하므로 여기서 선언한다. 
-//					int big_count = 0;
-//					int small_count = 0;
-//					for(int i = 0; i<d; i++) { //8방 검사
-//						nr = r+dr[i];
-//						nc = c+dc[i];
-//						//경계검사를 하지 않는다 
-//						//==> why? 0이나 N-1 위치의 사방은 경계 밖이므로 검사해야 되지만
-//						//		   1~N-2까지만 탐색하므로 경계를 벗어날 일이 없다.
-//						// 큰수 라면   big_count 증가
-//						if(matrix[nr][nc] < matrix[r][c])
-//							big_count++;
-//							
-//						// 작은수 라면 small_count 증가
-//						if(matrix[nr][nc] > matrix[r][c])
-//							small_count++;
-//					}
-//					//큰수라면 
-//					if(big_count == 8)
-//						big++;
-//					//작은수라면
-//					if(small_count == 8)
-//						small++;
-//					
-//				}
-//			}
-//			
-//			System.out.println("#"+test_case+" "+big+" "+small);
-//		}
-//	}
-//}
-
-
-
