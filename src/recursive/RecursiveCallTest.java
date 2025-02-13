@@ -23,7 +23,30 @@ public class RecursiveCallTest {
 		System.out.print(num + " ");
 		print(num + 1);
 	}
+	public static void print2(int num) {
+		if (num == -1) return;
+		System.out.print(num+" ");
+		print2(num -1);
+	}
+	
+	//특정 조건을 만족할때 재귀가 진행되는 구조
+	//bottom -> top
+	public static void print3(int num) {
+		if (num <= N) {
+			System.out.print(num+" ");
+			print3(num+1);
+		}
+	}
+	//top -> down 10 9 8 7 6 5 4 3 2 1 0
+	public static void print4(int num) {
+		if (num >= 0) {
+			System.out.print(num + " ");
+			print4(num-1);
+		}
+	}
 	public static void main(String[] args) {
+		print3(0);
+		System.out.println();
 		for (int i = 0; i <= N; i++) {
 			System.out.print(i + " ");
 		}
@@ -36,11 +59,9 @@ public class RecursiveCallTest {
 		}
 		System.out.println();
 		print2(N);
+		System.out.println();
+		print4(N);
 	}
-	public static void print2(int num) {
-		if (num == -1) return;
-		System.out.print(num+" ");
-		print2(num -1);
-	}
+
 
 }
