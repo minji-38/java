@@ -1,5 +1,7 @@
 package chapter06;
 
+import java.util.Objects;
+
 public class Employee implements Comparable<Employee>{ //Employee 를 비교하는 인터페이스 추가
 	private String empno;
 	private String name;
@@ -64,18 +66,24 @@ public class Employee implements Comparable<Employee>{ //Employee 를 비교하�
 		return builder.toString();
 	}
 	
+	@Override
+	public int hashCode() {
+		return Objects.hash(empno, name, salary);
+	}
 	/**
-	 * 객체의 내용을 비교하는 기능 
-	 * - 반드시 Override를 해야 객체 내용을 비교할 수 있다. 
+	 * 객체의 내용을 비교하는 기능
+	 * - 반드시 Override를 해야 객체 내용을 비교할 수 있다.
 	 */
+	@Override
 	public boolean equals(Object obj) {
-		if (obj instanceof Employee) { //instanceof가 null검사도 한다 
-			Employee emp = (Employee) obj;
-			if( empno != null && empno.equals(emp.empno)) {
-				return true;
-			}
-		}
-		return false;
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Employee other = (Employee) obj;
+		return Objects.equals(empno, other.empno) && Objects.equals(name, other.name) && salary == other.salary;
 	}
 }
 
