@@ -62,9 +62,29 @@ public class QueueTest {
 		System.out.println(pq.poll());
 		System.out.println(pq.poll());
 		
-		
+		PriorityQueue<Top> pq2 = new PriorityQueue<>(3);
+		pq2.offer(new Top(3,1));
+		pq2.offer(new Top(1,2));
+		pq2.offer(new Top(2,3));
+		System.out.println(pq2.poll().height);
+		System.out.println(pq2.poll().height);
+		System.out.println(pq2.poll().height);
 	}
 }
+class Top implements Comparable<Top>{
+	int height, index;
 
+	public Top(int height, int index) {
+		super();
+		this.height = height;
+		this.index = index;
+	}
+
+	@Override
+	public int compareTo(Top o) {
+		return height - o.height; //오름차순 정렬
+	}
+	
+}
 
 
