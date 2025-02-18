@@ -3,7 +3,7 @@ package permutation;
 //0.5초 -> 0.1초로 줄어들었음!
 import java.util.Arrays;
 // 10P10 : 0.5초 컷 
-public class Permutation2_nPr_flag {
+public class Permutation2_nPr2_flag {
 	static long tc;					//순열 개수
 	static long count;				//반복 횟수 
 	static int  R;					//뽑을 개수			
@@ -21,7 +21,7 @@ public class Permutation2_nPr_flag {
 		if(depth == R) {
 			tc++;
 			//순열을 뽑은 이후의 task를 작성 
-//			System.out.println(Arrays.toString(numbers));
+			System.out.println(Arrays.toString(numbers));
 			return ;
 		}
 		top:
@@ -44,8 +44,8 @@ public class Permutation2_nPr_flag {
 		}
 	}
 	public static void main(String[] args) {
-		input = new int[] {1,2,3,4,5,6,7,8,9,10};
-//		input = new int[] {1,2,3};
+//		input = new int[] {1,2,3,4,5,6,7,8,9,10};
+		input = new int[] {1,2,3};
 		N = input.length;
 		R = input.length;
 		numbers = new int[R];
