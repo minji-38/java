@@ -8,7 +8,7 @@ import java.util.Scanner;
  * 시간 복잡도 2^n
  *
  */
-public class SubsetTest3_1 {
+public class SubsetTest3_외워 {
 	static int N, totalCnt;
 	static int[] input;
 	static int[] numbers;
@@ -45,6 +45,6 @@ public class SubsetTest3_1 {
 		numbers[len] = input[depth];
 		subset(depth+1, len+1);
 		//원소 비선택
-		subset(depth+1, len);
+		subset(depth+1, len); // 비선택일때 상단 원소선택 부분을 실행하고 와도, 비선택 시 len이 증가하지 않은 상태이므로 덮어씌워져서 괜찮!
 	}
 }
