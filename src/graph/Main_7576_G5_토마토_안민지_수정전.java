@@ -78,7 +78,7 @@ public class Main_7576_G5_토마토_안민지_수정전 {
 					}
 //					도착 위치가 아니면 다음 좌표를 탐색하기 위해 방문 처리후 큐에 넣기
 					visited[nr][nc] = true;
-					q.offer(new int[] {nr,nc,dist+1});
+//					q.offer(new int[] {nr,nc,);
 				}
 				
 			}
